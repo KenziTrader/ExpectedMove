@@ -13,25 +13,25 @@ import UIKit
 
 protocol ExpectedMovePresenterInput
 {
-  func presentSomething(response: ExpectedMove.FetchTicker.Response)
+    func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
 }
 
 protocol ExpectedMovePresenterOutput: class
 {
-  func displaySomething(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
 }
 
 class ExpectedMovePresenter: ExpectedMovePresenterInput
 {
-  weak var output: ExpectedMovePresenterOutput!
-  
-  // MARK: Presentation logic
-  
-  func presentSomething(response: ExpectedMove.FetchTicker.Response)
-  {
-    // NOTE: Format the response from the Interactor and pass the result back to the View Controller
+    weak var output: ExpectedMovePresenterOutput!
     
-    let viewModel = ExpectedMove.FetchTicker.ViewModel()
-    output.displaySomething(viewModel)
-  }
+    // MARK: Presentation logic
+    
+    func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
+    {
+        // NOTE: Format the response from the Interactor and pass the result back to the View Controller
+        
+        let viewModel = ExpectedMove.FetchTicker.ViewModel()
+        output.displayProfitLossDaysAhead(viewModel)
+    }
 }

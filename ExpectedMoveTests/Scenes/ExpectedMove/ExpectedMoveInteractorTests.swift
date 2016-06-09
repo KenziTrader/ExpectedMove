@@ -14,40 +14,89 @@ import XCTest
 
 class ExpectedMoveInteractorTests: XCTestCase
 {
-  // MARK: Subject under test
-  
-  var sut: ExpectedMoveInteractor!
-  
-  // MARK: Test lifecycle
-  
-  override func setUp()
-  {
-    super.setUp()
-    setupExpectedMoveInteractor()
-  }
-  
-  override func tearDown()
-  {
-    super.tearDown()
-  }
-  
-  // MARK: Test setup
-  
-  func setupExpectedMoveInteractor()
-  {
-    sut = ExpectedMoveInteractor()
-  }
-  
-  // MARK: Test doubles
-  
-  // MARK: Tests
-  
-  func testSomething()
-  {
-    // Given
+    // MARK: Subject under test
     
-    // When
+    var sut: ExpectedMoveInteractor!
     
-    // Then
-  }
+    // MARK: Test lifecycle
+    
+    override func setUp()
+    {
+        super.setUp()
+        setupExpectedMoveInteractor()
+    }
+    
+    override func tearDown()
+    {
+        super.tearDown()
+    }
+    
+    // MARK: Test setup
+    
+    func setupExpectedMoveInteractor()
+    {
+        sut = ExpectedMoveInteractor()
+    }
+    
+    // MARK: Test doubles
+    
+    class ExpectedMoveInteractorOutputSpy: ExpectedMoveInteractorOutput
+    {
+        // MARK: Method call expectations
+        var presentProfitLossDaysAheadCalled = false
+        
+        // MARK: Spied methods
+        func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
+        {
+            presentProfitLossDaysAheadCalled = true
+        }
+    }
+    
+    class FetchTickerWorkerSpy: FetchTickerWorker
+    {
+        // MARK: Method call expectations
+        var fetchTickerCalled = false
+        
+        // MARK: Spied methods
+        override func fetchTicker(ticker: String, completionHandler: (financeData: FinanceData) -> Void)
+        {
+            fetchTickerCalled = true
+            completionHandler(financeData: FinanceData())
+        }
+        
+    }
+    
+    // MARK: Tests
+    
+    func testFetchTickerShouldAskExpectedMoveWorkerToFetchTicker()
+    {
+        // Given
+        let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
+        sut.output = expectedMoveInteractorOutputSpy
+        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataFromMemory())
+        sut.worker = workerSpy
+        
+        // When
+        let request = ExpectedMove.FetchTicker.Request()
+        sut.fetchTicker(request)
+        
+        // Then
+        XCTAssert(workerSpy.fetchTickerCalled, "FetchTicker() should ask worker to fetch ticker data")
+    }
+
+    func testFetchTickerShouldAskPresenterToFormatResult()
+    {
+        // Given
+        let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
+        sut.output = expectedMoveInteractorOutputSpy
+        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataFromMemory())
+        sut.worker = workerSpy
+        
+        // When
+        let request = ExpectedMove.FetchTicker.Request()
+        sut.fetchTicker(request)
+        
+        // Then
+        XCTAssert(expectedMoveInteractorOutputSpy.presentProfitLossDaysAheadCalled, "FetchTicker() should ask presenter to format expected mover result")
+    }
 }

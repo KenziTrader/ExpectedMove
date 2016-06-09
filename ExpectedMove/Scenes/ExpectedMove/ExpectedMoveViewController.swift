@@ -13,7 +13,7 @@ import UIKit
 
 protocol ExpectedMoveViewControllerInput
 {
-    func displaySomething(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
 }
 
 protocol ExpectedMoveViewControllerOutput
@@ -56,7 +56,7 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     
     // MARK: Display logic
     
-    func displaySomething(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
     {
         // NOTE: Display the result from the Presenter
         

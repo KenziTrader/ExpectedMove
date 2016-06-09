@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A70FC26C1D09753000A206A0 /* FetchTickerWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC26B1D09753000A206A0 /* FetchTickerWorker.swift */; };
+		A70FC26F1D098E1000A206A0 /* FinanceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC26E1D098E1000A206A0 /* FinanceData.swift */; };
+		A70FC2711D09C01100A206A0 /* FinanceDataFromMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC2701D09C01100A206A0 /* FinanceDataFromMemory.swift */; };
+		A70FC2731D09C0A500A206A0 /* FinanceDataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC2721D09C0A500A206A0 /* FinanceDataAPI.swift */; };
+		A70FC27E1D09C47500A206A0 /* FetchTickerWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */; };
 		A731E9971D08695C001A3AC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9961D08695C001A3AC2 /* AppDelegate.swift */; };
-		A731E9991D08695C001A3AC2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9981D08695C001A3AC2 /* ViewController.swift */; };
 		A731E99C1D08695C001A3AC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A731E99A1D08695C001A3AC2 /* Main.storyboard */; };
 		A731E99E1D08695C001A3AC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A731E99D1D08695C001A3AC2 /* Assets.xcassets */; };
 		A731E9A11D08695C001A3AC2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A731E99F1D08695C001A3AC2 /* LaunchScreen.storyboard */; };
@@ -24,7 +28,6 @@
 		A731E9DA1D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D61D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift */; };
 		A731E9DB1D086B18001A3AC2 /* ExpectedMovePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */; };
 		A731E9DC1D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */; };
-		A731E9DD1D086B18001A3AC2 /* ExpectedMoveWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D91D086B18001A3AC2 /* ExpectedMoveWorkerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,9 +48,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A70FC26B1D09753000A206A0 /* FetchTickerWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchTickerWorker.swift; path = Workers/FetchTickerWorker.swift; sourceTree = "<group>"; };
+		A70FC26E1D098E1000A206A0 /* FinanceData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceData.swift; path = Models/FinanceData.swift; sourceTree = "<group>"; };
+		A70FC2701D09C01100A206A0 /* FinanceDataFromMemory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceDataFromMemory.swift; path = Services/FinanceDataFromMemory.swift; sourceTree = "<group>"; };
+		A70FC2721D09C0A500A206A0 /* FinanceDataAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceDataAPI.swift; path = Services/FinanceDataAPI.swift; sourceTree = "<group>"; };
+		A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchTickerWorkerTests.swift; path = Workers/FetchTickerWorkerTests.swift; sourceTree = "<group>"; };
 		A731E9931D08695B001A3AC2 /* ExpectedMove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpectedMove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A731E9961D08695C001A3AC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A731E9981D08695C001A3AC2 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A731E99B1D08695C001A3AC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A731E99D1D08695C001A3AC2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A731E9A01D08695C001A3AC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -68,7 +75,6 @@
 		A731E9D61D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveInteractorTests.swift; path = Scenes/ExpectedMove/ExpectedMoveInteractorTests.swift; sourceTree = "<group>"; };
 		A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMovePresenterTests.swift; path = Scenes/ExpectedMove/ExpectedMovePresenterTests.swift; sourceTree = "<group>"; };
 		A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveViewControllerTests.swift; path = Scenes/ExpectedMove/ExpectedMoveViewControllerTests.swift; sourceTree = "<group>"; };
-		A731E9D91D086B18001A3AC2 /* ExpectedMoveWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveWorkerTests.swift; path = Scenes/ExpectedMove/ExpectedMoveWorkerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A70FC2691D0974D800A206A0 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				A70FC26B1D09753000A206A0 /* FetchTickerWorker.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
+		A70FC26A1D0974E900A206A0 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				A70FC2701D09C01100A206A0 /* FinanceDataFromMemory.swift */,
+				A70FC2721D09C0A500A206A0 /* FinanceDataAPI.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		A70FC26D1D098D8B00A206A0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A70FC26E1D098E1000A206A0 /* FinanceData.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		A70FC2741D09C3EB00A206A0 /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+				A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */,
+			);
+			name = Workers;
+			sourceTree = "<group>";
+		};
 		A731E98A1D08695B001A3AC2 = {
 			isa = PBXGroup;
 			children = (
@@ -119,9 +158,11 @@
 		A731E9951D08695C001A3AC2 /* ExpectedMove */ = {
 			isa = PBXGroup;
 			children = (
+				A70FC26D1D098D8B00A206A0 /* Models */,
 				A731E9C41D086A73001A3AC2 /* Scenes */,
+				A70FC26A1D0974E900A206A0 /* Services */,
+				A70FC2691D0974D800A206A0 /* Workers */,
 				A731E9961D08695C001A3AC2 /* AppDelegate.swift */,
-				A731E9981D08695C001A3AC2 /* ViewController.swift */,
 				A731E99A1D08695C001A3AC2 /* Main.storyboard */,
 				A731E99D1D08695C001A3AC2 /* Assets.xcassets */,
 				A731E99F1D08695C001A3AC2 /* LaunchScreen.storyboard */,
@@ -133,9 +174,10 @@
 		A731E9AA1D08695C001A3AC2 /* ExpectedMoveTests */ = {
 			isa = PBXGroup;
 			children = (
-				A731E9D41D086AE1001A3AC2 /* Scenes */,
 				A731E9AB1D08695C001A3AC2 /* ExpectedMoveTests.swift */,
 				A731E9AD1D08695C001A3AC2 /* Info.plist */,
+				A731E9D41D086AE1001A3AC2 /* Scenes */,
+				A70FC2741D09C3EB00A206A0 /* Workers */,
 			);
 			path = ExpectedMoveTests;
 			sourceTree = "<group>";
@@ -185,7 +227,6 @@
 				A731E9D61D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift */,
 				A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */,
 				A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */,
-				A731E9D91D086B18001A3AC2 /* ExpectedMoveWorkerTests.swift */,
 			);
 			name = ExpectedMove;
 			sourceTree = "<group>";
@@ -322,13 +363,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A731E9CD1D086ABE001A3AC2 /* ExpectedMoveConfigurator.swift in Sources */,
-				A731E9991D08695C001A3AC2 /* ViewController.swift in Sources */,
 				A731E9CF1D086ABE001A3AC2 /* ExpectedMoveModels.swift in Sources */,
 				A731E9D01D086ABE001A3AC2 /* ExpectedMovePresenter.swift in Sources */,
+				A70FC2731D09C0A500A206A0 /* FinanceDataAPI.swift in Sources */,
 				A731E9D11D086ABE001A3AC2 /* ExpectedMoveRouter.swift in Sources */,
 				A731E9D31D086ABE001A3AC2 /* ExpectedMoveWorker.swift in Sources */,
+				A70FC2711D09C01100A206A0 /* FinanceDataFromMemory.swift in Sources */,
+				A70FC26C1D09753000A206A0 /* FetchTickerWorker.swift in Sources */,
 				A731E9971D08695C001A3AC2 /* AppDelegate.swift in Sources */,
 				A731E9D21D086ABE001A3AC2 /* ExpectedMoveViewController.swift in Sources */,
+				A70FC26F1D098E1000A206A0 /* FinanceData.swift in Sources */,
 				A731E9CE1D086ABE001A3AC2 /* ExpectedMoveInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,10 +382,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A731E9DB1D086B18001A3AC2 /* ExpectedMovePresenterTests.swift in Sources */,
+				A70FC27E1D09C47500A206A0 /* FetchTickerWorkerTests.swift in Sources */,
 				A731E9AC1D08695C001A3AC2 /* ExpectedMoveTests.swift in Sources */,
 				A731E9DA1D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift in Sources */,
 				A731E9DC1D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift in Sources */,
-				A731E9DD1D086B18001A3AC2 /* ExpectedMoveWorkerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,6 +604,7 @@
 				A731E9BD1D08695C001A3AC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A731E9BE1D08695C001A3AC2 /* Build configuration list for PBXNativeTarget "ExpectedMoveTests" */ = {
 			isa = XCConfigurationList;
@@ -568,6 +613,7 @@
 				A731E9C01D08695C001A3AC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A731E9C11D08695C001A3AC2 /* Build configuration list for PBXNativeTarget "ExpectedMoveUITests" */ = {
 			isa = XCConfigurationList;
@@ -576,6 +622,7 @@
 				A731E9C31D08695C001A3AC2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

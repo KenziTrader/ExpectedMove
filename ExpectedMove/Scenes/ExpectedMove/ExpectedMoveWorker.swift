@@ -13,10 +13,10 @@ import UIKit
 
 class ExpectedMoveWorker
 {
-  // MARK: Business Logic
-  
-  func doSomeWork()
-  {
-    // NOTE: Do the work
-  }
+    // MARK: Business Logic
+    
+    func fetchTicker(ticker: String, completionHandler: (expectedMoves: [ExpectedMove.FetchTicker.ProfitLoss]) -> Void)
+    {
+        // NOTE: Do the work
+    }
 }

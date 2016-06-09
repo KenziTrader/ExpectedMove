@@ -14,11 +14,25 @@ import UIKit
 struct ExpectedMove {
     struct FetchTicker {
         struct Request {
-            var ticker: String
+            var ticker: String = ""
         }
         struct Response {
+            var price: Double = 0
+            var expectedProfitLossDaysAhead = [ProfitLoss]()
         }
         struct ViewModel {
+            var price = ""
+            var expectedProfitLossDaysAhead = [ExpectedMoveViewModel]()
+        }
+        struct ProfitLoss {
+            var ndays: Int
+            var loss: Double
+            var profit: Double
+        }
+        struct ExpectedMoveViewModel {
+            var ndays: Int
+            var loss: String
+            var profit: String
         }
     }
 }

@@ -13,31 +13,33 @@ import UIKit
 
 protocol ExpectedMoveInteractorInput
 {
-  func fetchTicker(request: ExpectedMove.FetchTicker.Request)
+    func fetchTicker(request: ExpectedMove.FetchTicker.Request)
 }
 
 protocol ExpectedMoveInteractorOutput
 {
-  func presentSomething(response: ExpectedMove.FetchTicker.Response)
+    func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
 }
 
 class ExpectedMoveInteractor: ExpectedMoveInteractorInput
 {
-  var output: ExpectedMoveInteractorOutput!
-  var worker: ExpectedMoveWorker!
-  
-  // MARK: Business logic
-  
-  func fetchTicker(request: ExpectedMove.FetchTicker.Request)
-  {
-    // NOTE: Create some Worker to do the work
+    var output: ExpectedMoveInteractorOutput!
+    var worker = FetchTickerWorker(financeDataService: FinanceDataAPI())
     
-    worker = ExpectedMoveWorker()
-    worker.doSomeWork()
+    // MARK: Business logic
     
-    // NOTE: Pass the result to the Presenter
-    
-    let response = ExpectedMove.FetchTicker.Response()
-    output.presentSomething(response)
-  }
+    func fetchTicker(request: ExpectedMove.FetchTicker.Request)
+    {
+        let ticker = request.ticker
+        
+        // NOTE: Ask the Worker to do the work
+        
+        worker.fetchTicker(ticker) {
+            expectedMoves in
+            // NOTE: Pass the result to the Presenter
+            
+            let response = ExpectedMove.FetchTicker.Response()
+            self.output.presentProfitLossDaysAhead(response)
+        }
+    }
 }
