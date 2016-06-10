@@ -15,7 +15,7 @@ class ExpectedMoveWorker
 {
     // MARK: Business Logic
     
-    func fetchTicker(ticker: String, completionHandler: (expectedMoves: [ExpectedMove.FetchTicker.ProfitLoss]) -> Void)
+    func fetchTicker(ticker: String, completionHandler: (expectedMoves: [ProfitLoss]) -> Void)
     {
         // NOTE: Do the work
     }

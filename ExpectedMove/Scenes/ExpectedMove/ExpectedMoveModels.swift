@@ -24,11 +24,6 @@ struct ExpectedMove {
             var price = ""
             var expectedProfitLossDaysAhead = [ExpectedMoveViewModel]()
         }
-        struct ProfitLoss {
-            var ndays: Int
-            var loss: Double
-            var profit: Double
-        }
         struct ExpectedMoveViewModel {
             var ndays: Int
             var loss: String
