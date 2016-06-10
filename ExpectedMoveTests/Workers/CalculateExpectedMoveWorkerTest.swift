@@ -49,11 +49,11 @@ class CalculateExpectedMoveWorkerTest: XCTestCase
         let numberOfShares = 100
         let impliedVolatility = 19.7 / 100
         let price = 99.90
-        let profitLoss = sut.calculate(price, numberOfShares: numberOfShares, impliedVolatility: impliedVolatility)
-        let profit = profitLoss.map {$0.profit}
+        let profitLosses = sut.calculate(price, numberOfShares: numberOfShares, impliedVolatility: impliedVolatility)
+        let profits = profitLosses.map {$0.profit}
         let expected = [103.011, 145.680, 178.421, 272.543]
         // check if the results are equal up to 3 digits after the decimal point
-        let allEqual = zip(profit, expected).map{round(($0.0 - $0.1)*1.0E3)}.reduce(true){$0 && $1==0.0}
+        let allEqual = zip(profits, expected).map{round(($0.0 - $0.1)*1.0E3)}.reduce(true){$0 && $1==0.0}
         
         // Then
         XCTAssert(allEqual, "CalculateExpectedMoveWorker should return correct profit for the example data")

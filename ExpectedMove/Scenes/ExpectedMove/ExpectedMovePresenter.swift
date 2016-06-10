@@ -24,6 +24,22 @@ protocol ExpectedMovePresenterOutput: class
 class ExpectedMovePresenter: ExpectedMovePresenterInput
 {
     weak var output: ExpectedMovePresenterOutput!
+    let priceFormatter: NSNumberFormatter = {
+        let priceFormatter = NSNumberFormatter()
+        priceFormatter.numberStyle = .DecimalStyle
+        priceFormatter.roundingIncrement = 0.01
+        priceFormatter.minimumFractionDigits = 2
+        priceFormatter.maximumFractionDigits = 2
+        return priceFormatter
+    }()
+    let profitLossFormatter: NSNumberFormatter = {
+        let profitLossFormatter = NSNumberFormatter()
+        profitLossFormatter.numberStyle = .DecimalStyle
+        profitLossFormatter.positiveFormat = "+"
+        profitLossFormatter.negativeFormat = "-"
+        profitLossFormatter.roundingIncrement = 1.0
+        return profitLossFormatter
+    }()
     
     // MARK: Presentation logic
     
@@ -31,7 +47,18 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
     {
         // NOTE: Format the response from the Interactor and pass the result back to the View Controller
         
-        let viewModel = ExpectedMove.FetchTicker.ViewModel()
+        let price = response.price
+        let displayedPrice = priceFormatter.stringFromNumber(price)
+        
+        var displayedProfitLosses: [ExpectedMove.FetchTicker.DisplayedProfitLoss] = []
+        for profitLoss in response.expectedProfitLossDaysAhead {
+            let loss = profitLossFormatter.stringFromNumber(profitLoss.loss)
+            let profit = profitLossFormatter.stringFromNumber(profitLoss.profit)
+            let displayedProfitLoss = ExpectedMove.FetchTicker.DisplayedProfitLoss(ndays: profitLoss.ndays, loss: loss!, profit: profit!)
+            displayedProfitLosses.append(displayedProfitLoss)
+        }
+
+        let viewModel = ExpectedMove.FetchTicker.ViewModel(price: displayedPrice!, expectedProfitLossDaysAhead: displayedProfitLosses)
         output.displayProfitLossDaysAhead(viewModel)
     }
 }

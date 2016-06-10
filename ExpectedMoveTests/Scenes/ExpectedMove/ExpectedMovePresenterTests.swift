@@ -14,40 +14,98 @@ import XCTest
 
 class ExpectedMovePresenterTests: XCTestCase
 {
-  // MARK: Subject under test
-  
-  var sut: ExpectedMovePresenter!
-  
-  // MARK: Test lifecycle
-  
-  override func setUp()
-  {
-    super.setUp()
-    setupExpectedMovePresenter()
-  }
-  
-  override func tearDown()
-  {
-    super.tearDown()
-  }
-  
-  // MARK: Test setup
-  
-  func setupExpectedMovePresenter()
-  {
-    sut = ExpectedMovePresenter()
-  }
-  
-  // MARK: Test doubles
-  
-  // MARK: Tests
-  
-  func testSomething()
-  {
-    // Given
+    // MARK: Subject under test
     
-    // When
+    var sut: ExpectedMovePresenter!
     
-    // Then
-  }
+    // MARK: Test lifecycle
+    
+    override func setUp()
+    {
+        super.setUp()
+        setupExpectedMovePresenter()
+    }
+    
+    override func tearDown()
+    {
+        super.tearDown()
+    }
+    
+    // MARK: Test setup
+    
+    func setupExpectedMovePresenter()
+    {
+        sut = ExpectedMovePresenter()
+    }
+    
+    // MARK: Test doubles
+    
+    class ExpectedMovePresenterOutputSpy: ExpectedMovePresenterOutput
+    {
+        // MARK: Method call expectations
+        var displayProfitLossDaysAheadCalled = false
+        
+        // MARK: Argument expectations
+        var fetchTicketviewModel: ExpectedMove.FetchTicker.ViewModel!
+        
+        // MARK: Spied methods
+        func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
+        {
+            displayProfitLossDaysAheadCalled = true
+            fetchTicketviewModel = viewModel
+        }
+    }
+    
+    func sampleResponse() -> ExpectedMove.FetchTicker.Response
+    {
+        let numberOfShares = 100
+        let impliedVolatility = 19.7 / 100
+        let price = 99.90
+        
+        let worker = CalculateExpectedMoveWorker()
+        let profitLosses = worker.calculate(price, numberOfShares: numberOfShares, impliedVolatility: impliedVolatility)
+        
+        let response = ExpectedMove.FetchTicker.Response(price: price, expectedProfitLossDaysAhead: profitLosses)
+        return response
+    }
+    
+    // MARK: Tests
+    
+    func testDisplayProfitLossDaysAheadShouldFormatCalculatedProfitLossForDisplay()
+    {
+        // Given
+        let expectedMovePresenterOutputSpy = ExpectedMovePresenterOutputSpy()
+        sut.output = expectedMovePresenterOutputSpy
+        
+        let response = sampleResponse()
+        let expectedProfits = ["103", "146", "178", "273"]
+        
+        // When
+        sut.presentProfitLossDaysAhead(response)
+        
+        // Then
+        let displayedPrice = expectedMovePresenterOutputSpy.fetchTicketviewModel.price
+        XCTAssertEqual(displayedPrice, "99.90", "Presenting fetched ticker should properly format price")
+        let displayedProfitLosses = expectedMovePresenterOutputSpy.fetchTicketviewModel.expectedProfitLossDaysAhead
+        for (displayedProfitLoss, expectedProfit) in zip(displayedProfitLosses, expectedProfits) {
+            XCTAssertEqual(displayedProfitLoss.loss, "-"+expectedProfit, "Presenting fetched ticker should properly format loss")
+            XCTAssertEqual(displayedProfitLoss.profit, "+"+expectedProfit, "Presenting fetched ticker should properly format profit")
+        }
+    }
+
+    func testPresentFetchTickerShouldAskViewControllerToDisplayPriceAndProfitLoss()
+    {
+        // Given
+        // Given
+        let expectedMovePresenterOutputSpy = ExpectedMovePresenterOutputSpy()
+        sut.output = expectedMovePresenterOutputSpy
+        
+        let response = sampleResponse()
+        
+        // When
+        sut.presentProfitLossDaysAhead(response)
+        
+        // Then
+        XCTAssert(expectedMovePresenterOutputSpy.displayProfitLossDaysAheadCalled, "Presenting fetched ticker should ask the view controller to display them")
+    }
 }

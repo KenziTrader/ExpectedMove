@@ -22,9 +22,9 @@ struct ExpectedMove {
         }
         struct ViewModel {
             var price = ""
-            var expectedProfitLossDaysAhead = [ExpectedMoveViewModel]()
+            var expectedProfitLossDaysAhead = [DisplayedProfitLoss]()
         }
-        struct ExpectedMoveViewModel {
+        struct DisplayedProfitLoss {
             var ndays: Int
             var loss: String
             var profit: String
