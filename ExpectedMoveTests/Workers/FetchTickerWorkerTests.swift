@@ -34,12 +34,12 @@ class FetchTickerWorkerTests: XCTestCase
     
     func setupFetchTickerWorker()
     {
-        sut = FetchTickerWorker(financeDataService: FinanceDataFromMemorySpy())
+        sut = FetchTickerWorker(financeDataService: FinanceDataAPISpy())
     }
     
     // MARK: Test doubles
     
-    class FinanceDataFromMemorySpy: FinanceDataFromMemory
+    class FinanceDataAPISpy: FinanceDataAPI
     {
         // MARK: Method call expectations
         var fetchTickerCalled = false
@@ -60,7 +60,7 @@ class FetchTickerWorkerTests: XCTestCase
     func testFetchTickerShouldReturnFinanceData()
     {
         // Given
-        let financeDataFromMemorySpy = sut.financeDataService as! FinanceDataFromMemorySpy
+        let financeDataAPISpy = sut.financeDataService as! FinanceDataAPISpy
         
         // When
         let expectation = expectationWithDescription("Wait for fetchTicker() to return")
@@ -70,7 +70,7 @@ class FetchTickerWorkerTests: XCTestCase
         }
         
         // Then
-        XCTAssert(financeDataFromMemorySpy.fetchTickerCalled, "Calling fetchTicker() should ask to get financial data")
+        XCTAssert(financeDataAPISpy.fetchTickerCalled, "Calling fetchTicker() should ask to get financial data")
         waitForExpectationsWithTimeout(1.1) { (error) in
             XCTAssert(true, "Calling fetchTicker() should result in the completion handler being called with the financial data")
         }
