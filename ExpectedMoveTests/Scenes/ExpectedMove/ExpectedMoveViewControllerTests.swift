@@ -68,6 +68,24 @@ class ExpectedMoveViewControllerTests: XCTestCase
         }
     }
     
+    func sampleviewModel(price: String, profits: [String]) -> ExpectedMove.FetchTicker.ViewModel
+    {
+        var viewModel = ExpectedMove.FetchTicker.ViewModel()
+
+        viewModel.price = price
+        
+        var profitLosses: [ExpectedMove.FetchTicker.DisplayedProfitLoss] = []
+        for profit in profits {
+            let displayedProfitLoss = ExpectedMove.FetchTicker.DisplayedProfitLoss(
+                ndays: 1, loss: "-"+profit, profit: "+"+profit)
+            profitLosses.append(displayedProfitLoss)
+        }
+        
+        viewModel.expectedProfitLossDaysAhead = profitLosses
+
+        return viewModel
+    }
+
     // MARK: Tests
     
     func testTickerTextFieldHasExpectedMoveViewControllerAsDelegate()
@@ -95,5 +113,28 @@ class ExpectedMoveViewControllerTests: XCTestCase
         
         // Then
         XCTAssert(expectedMoveViewControllerOutputSpy.fetchTickerCalled, "Should fetch ticker when ticker text field ends editing")
+    }
+    
+    func testShouldConfigurePriceTextField()
+    {
+        // Given
+        let price = "99.80"
+        let pls = ["103", "145", "178", "272"]
+        let viewModel = sampleviewModel(price, profits: pls)
+        
+        // When
+        loadView()
+        sut.displayProfitLossDaysAhead(viewModel)
+        let displayedPrice = sut.displayedPriceLabel.text
+        
+        // Then
+        XCTAssertEqual(displayedPrice, price, "View controller should set the price label")
+        var tag = 0
+        for profit in pls {
+            XCTAssertEqual(sut.profitLosslabels[tag].text, "-"+profit, "View controller should set the loss label")
+            tag += 1
+            XCTAssertEqual(sut.profitLosslabels[tag].text, "+"+profit, "View controller should set the profit label")
+            tag += 1
+       }
     }
 }

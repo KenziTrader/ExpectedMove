@@ -15,3 +15,11 @@ class FinanceDataAPI: FinanceDataProtocol
         
     }
 }
+
+extension FinanceData {
+
+    func parseYahooJSON(json: String) -> FinanceData
+    {
+        return FinanceData()
+    }
+}

@@ -29,7 +29,8 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     // MARK: Outlets
     
     @IBOutlet weak var tickerTextField: UITextField!
-    
+    @IBOutlet weak var displayedPriceLabel: UILabel!
+    @IBOutlet var profitLosslabels: [UILabel]!
     
     // MARK: Object lifecycle
     
@@ -60,7 +61,14 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     {
         // NOTE: Display the result from the Presenter
         
-        // nameTextField.text = viewModel.name
+        displayedPriceLabel.text = viewModel.price
+        var tag = 0
+        for profitLoss in viewModel.expectedProfitLossDaysAhead {
+            profitLosslabels[tag].text = profitLoss.loss
+            tag += 1
+            profitLosslabels[tag].text = profitLoss.profit
+            tag += 1
+        }
     }
 }
 
