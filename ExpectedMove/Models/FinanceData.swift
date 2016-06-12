@@ -10,59 +10,59 @@ import Foundation
 
 struct FinanceData
 {
-    var Ask: Double?
-    var AverageDailyVolume: Int64?
-    var Bid: Double?
-    var BookValue: Double?
-    var Change: Double?
-    var Currency: String?
-    var DividendShare: Double?
-    var LastTradeDate: NSDate?
-    var TradeDate: NSDate?
-    var EarningsShare: Double?
+    var ask: Double?
+    var averageDailyVolume: Int?
+    var bid: Double?
+    var bookValue: Double?
+    var change: Double?
+    var currency: String?
+    var dividendShare: Double?
+    var lastTradeDate: NSDate?
+    var tradeDate: NSDate?
+    var earningsShare: Double?
     var EPSEstimateCurrentYear: Double?
     var EPSEstimateNextYear: Double?
     var EPSEstimateNextQuarter: Double?
-    var DaysLow: Double?
-    var DaysHigh: Double?
-    var YearLow: Double?
-    var YearHigh: Double?
-    var MarketCapitalization: String?
+    var daysLow: Double?
+    var daysHigh: Double?
+    var yearLow: Double?
+    var yearHigh: Double?
+    var marketCapitalization: String?
     var EBITDA: String?
-    var ChangeFromYearLow: Double?
-    var PercentChangeFromYearLow: Double?
-    var ChangeFromYearHigh: Double?
-    var PercebtChangeFromYearHigh: Double?
-    var LastTradePriceOnly: Double?
-    var HighLimit: String?
-    var LowLimit: String?
-    var DaysRange: String?
-    var FiftydayMovingAverage: Double?
-    var TwoHundreddayMovingAverage: Double?
-    var ChangeFromTwoHundreddayMovingAverage: Double?
-    var PercentChangeFromTwoHundreddayMovingAverage: Double?
-    var ChangeFromFiftydayMovingAverage: Double?
-    var PercentChangeFromFiftydayMovingAverage: Double?
-    var Name: String?
-    var Open: Double?
-    var PreviousClose: Double?
-    var ChangeinPercent: Double?
-    var PriceSales:Double?
-    var PriceBook: Double?
-    var ExDividendDate: NSDate?
+    var changeFromYearLow: Double?
+    var percentChangeFromYearLow: Double?
+    var changeFromYearHigh: Double?
+    var percebtChangeFromYearHigh: Double?
+    var lastTradePrice: Double?
+    var highLimit: String?
+    var lowLimit: String?
+    var daysRange: String?
+    var fiftydayMovingAverage: Double?
+    var twoHundreddayMovingAverage: Double?
+    var changeFromTwoHundreddayMovingAverage: Double?
+    var percentChangeFromTwoHundreddayMovingAverage: Double?
+    var changeFromFiftydayMovingAverage: Double?
+    var percentChangeFromFiftydayMovingAverage: Double?
+    var name: String?
+    var open: Double?
+    var previousClose: Double?
+    var changeinPercent: Double?
+    var priceSales:Double?
+    var priceBook: Double?
+    var exDividendDate: NSDate?
     var PERatio: Double?
-    var DividendPayDate: NSDate?
+    var dividendPayDate: NSDate?
     var PERatioRealtime: Double?
     var PEGRatio: Double?
-    var PriceEPSEstimateCurrentYear: Double?
-    var PriceEPSEstimateNextYear: Double?
-    var Symbol: String?
-    var ShortRatio: Double?
-    var LastTradeTime: NSDate?
-    var OneyrTargetPrice: Double?
-    var Volume: Int64?
-    var DaysValueChange: Double?
-    var StockExchange: String?
-    var DividendYield: Double?
-    var PercentChange: Double?
+    var priceEPSEstimateCurrentYear: Double?
+    var priceEPSEstimateNextYear: Double?
+    var symbol: String?
+    var shortRatio: Double?
+    var lastTradeTime: NSDate?
+    var oneyrTargetPrice: Double?
+    var volume: Int?
+    var daysValueChange: Double?
+    var stockExchange: String?
+    var dividendYield: Double?
+    var percentChange: Double?
 }

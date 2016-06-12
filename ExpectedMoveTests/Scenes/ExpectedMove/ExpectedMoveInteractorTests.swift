@@ -66,6 +66,14 @@ class ExpectedMoveInteractorTests: XCTestCase
         
     }
     
+    class FinanceDataMock: FinanceDataProtocol
+    {
+        func fetchTicker(ticker: String, completionHandler: (financeData: FinanceData) -> Void)
+        {
+            
+        }
+    }
+    
     // MARK: Tests
     
     func testFetchTickerShouldAskExpectedMoveWorkerToFetchTicker()
@@ -73,7 +81,7 @@ class ExpectedMoveInteractorTests: XCTestCase
         // Given
         let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
         sut.output = expectedMoveInteractorOutputSpy
-        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataFromMemory())
+        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataMock())
         sut.worker = workerSpy
         
         // When
@@ -89,7 +97,7 @@ class ExpectedMoveInteractorTests: XCTestCase
         // Given
         let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
         sut.output = expectedMoveInteractorOutputSpy
-        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataFromMemory())
+        let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataMock())
         sut.worker = workerSpy
         
         // When
