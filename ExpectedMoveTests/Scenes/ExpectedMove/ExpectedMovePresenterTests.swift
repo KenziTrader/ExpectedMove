@@ -65,7 +65,7 @@ class ExpectedMovePresenterTests: XCTestCase
         let worker = CalculateExpectedMoveWorker()
         let profitLosses = worker.calculate(price, numberOfShares: numberOfShares, impliedVolatility: impliedVolatility)
         
-        let response = ExpectedMove.FetchTicker.Response(price: price, expectedProfitLossDaysAhead: profitLosses)
+        let response = ExpectedMove.FetchTicker.Response(price: price, profitLoss: profitLosses)
         return response
     }
     

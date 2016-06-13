@@ -19,27 +19,55 @@ protocol ExpectedMoveInteractorInput
 protocol ExpectedMoveInteractorOutput
 {
     func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
+    func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
 class ExpectedMoveInteractor: ExpectedMoveInteractorInput
 {
     var output: ExpectedMoveInteractorOutput!
-    var worker = FetchTickerWorker(financeDataService: FinanceDataAPI())
+    var fetchTickerWorker = FetchTickerWorker(financeDataService: FinanceDataAPI())
+    var calculateExpectedMoveWorker = CalculateExpectedMoveWorker()
     
     // MARK: Business logic
     
     func fetchTicker(request: ExpectedMove.FetchTicker.Request)
     {
         let ticker = request.ticker
-        
-        // NOTE: Ask the Worker to do the work
-        
-        worker.fetchTicker(ticker) {
-            expectedMoves in
-            // NOTE: Pass the result to the Presenter
+        if
+            let numberOfShares = request.numberOfShares.asInt(),
+            let impliedVolatility = request.impliedVolatility.asDouble()
+        {
             
-            let response = ExpectedMove.FetchTicker.Response()
-            self.output.presentProfitLossDaysAhead(response)
+            // NOTE: Ask the Worker to do the work
+            
+            fetchTickerWorker.fetchTicker(ticker) {
+                financeData in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.output.setNetworkActivityIndicatorVisible(false)
+                }
+                if let price = financeData.lastTradePrice {
+                    
+                    let profitLoss =
+                        self.calculateExpectedMoveWorker.calculate(
+                            price,
+                            numberOfShares: numberOfShares,
+                            impliedVolatility: impliedVolatility / 100.0)
+                    
+                    // NOTE: Pass the result to the Presenter
+                    
+                    var response = ExpectedMove.FetchTicker.Response()
+                    response.price = price
+                    response.profitLoss = profitLoss
+                    dispatch_async(dispatch_get_main_queue()) {
+                        self.output.presentProfitLossDaysAhead(response)
+                    }
+
+                } else {
+                    print("Query didn't return a valid price")
+                }
+            }
+            output.setNetworkActivityIndicatorVisible(true)
         }
     }
 }

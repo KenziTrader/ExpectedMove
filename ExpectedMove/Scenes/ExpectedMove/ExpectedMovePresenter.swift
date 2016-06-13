@@ -14,11 +14,13 @@ import UIKit
 protocol ExpectedMovePresenterInput
 {
     func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
+    func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
 protocol ExpectedMovePresenterOutput: class
 {
     func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
 class ExpectedMovePresenter: ExpectedMovePresenterInput
@@ -51,7 +53,7 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
         let displayedPrice = priceFormatter.stringFromNumber(price)
         
         var displayedProfitLosses: [ExpectedMove.FetchTicker.DisplayedProfitLoss] = []
-        for profitLoss in response.expectedProfitLossDaysAhead {
+        for profitLoss in response.profitLoss {
             let loss = profitLossFormatter.stringFromNumber(profitLoss.loss)
             let profit = profitLossFormatter.stringFromNumber(profitLoss.profit)
             let displayedProfitLoss = ExpectedMove.FetchTicker.DisplayedProfitLoss(ndays: profitLoss.ndays, loss: loss!, profit: profit!)
@@ -60,5 +62,9 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
 
         let viewModel = ExpectedMove.FetchTicker.ViewModel(price: displayedPrice!, expectedProfitLossDaysAhead: displayedProfitLosses)
         output.displayProfitLossDaysAhead(viewModel)
+    }
+    
+    func setNetworkActivityIndicatorVisible(visible: Bool) {
+        output.setNetworkActivityIndicatorVisible(visible)
     }
 }

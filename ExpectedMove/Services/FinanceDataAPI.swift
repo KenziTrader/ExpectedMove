@@ -26,7 +26,7 @@ class FinanceDataAPI: FinanceDataProtocol
     
     func fetchTicker(ticker: String, completionHandler: (financeData: FinanceData) -> Void)
     {
-        let urlPath = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22\(ticker)%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json"
+        let urlPath = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22\(ticker)%22)&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&format=json"
         guard let endpoint = NSURL(string: urlPath) else {
             print("Error creating endpoint")
             return
@@ -140,7 +140,7 @@ extension FinanceData {
     }
 }
 
-private extension String {
+extension String {
 
     // create formatters only once
     struct Static {

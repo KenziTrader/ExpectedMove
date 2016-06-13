@@ -61,16 +61,30 @@ class ExpectedMoveInteractorTests: XCTestCase
         override func fetchTicker(ticker: String, completionHandler: (financeData: FinanceData) -> Void)
         {
             fetchTickerCalled = true
-            completionHandler(financeData: FinanceData())
+            financeDataService.fetchTicker(ticker, completionHandler: completionHandler)
         }
         
+    }
+    
+    class CalculateExpectedMoveWorkerSpy: CalculateExpectedMoveWorker
+    {
+        // MARK: Method call expectations
+        var calculateCalled = false
+
+        // MARK: Spied methods
+        override func calculate(price: Double, numberOfShares: Int, impliedVolatility: Double) -> [ProfitLoss] {
+            calculateCalled = true
+            return [ProfitLoss]()
+        }
     }
     
     class FinanceDataMock: FinanceDataProtocol
     {
         func fetchTicker(ticker: String, completionHandler: (financeData: FinanceData) -> Void)
         {
-            
+            var financeData = FinanceData()
+            financeData.lastTradePrice = 100.0
+            completionHandler(financeData: financeData)
         }
     }
     
@@ -82,29 +96,56 @@ class ExpectedMoveInteractorTests: XCTestCase
         let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
         sut.output = expectedMoveInteractorOutputSpy
         let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataMock())
-        sut.worker = workerSpy
+        sut.fetchTickerWorker = workerSpy
+        var request = ExpectedMove.FetchTicker.Request()
+        request.ticker = "AAPL"
+        request.numberOfShares = "100"
+        request.impliedVolatility = "0.182"
         
         // When
-        let request = ExpectedMove.FetchTicker.Request()
         sut.fetchTicker(request)
         
         // Then
         XCTAssert(workerSpy.fetchTickerCalled, "FetchTicker() should ask worker to fetch ticker data")
     }
-
+    
+    func testFetchTickerShouldAskCalculateExpectedMoveWorkerToCalculateExpectedMove()
+    {
+        // Given
+        let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
+        sut.output = expectedMoveInteractorOutputSpy
+        let fetchTickerWorkerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataMock())
+        sut.fetchTickerWorker = fetchTickerWorkerSpy
+        let calculateExpectedMoveWorkerSpy = CalculateExpectedMoveWorkerSpy()
+        sut.calculateExpectedMoveWorker = calculateExpectedMoveWorkerSpy
+        var request = ExpectedMove.FetchTicker.Request()
+        request.ticker = "AAPL"
+        request.numberOfShares = "100"
+        request.impliedVolatility = "0.182"
+        
+        // When
+        sut.fetchTicker(request)
+        
+        // Then
+        XCTAssert(calculateExpectedMoveWorkerSpy.calculateCalled, "FetchTicker() should ask worker to calculate expected move")
+    }
+    
     func testFetchTickerShouldAskPresenterToFormatResult()
     {
         // Given
         let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
         sut.output = expectedMoveInteractorOutputSpy
         let workerSpy = FetchTickerWorkerSpy(financeDataService: FinanceDataMock())
-        sut.worker = workerSpy
+        sut.fetchTickerWorker = workerSpy
+        var request = ExpectedMove.FetchTicker.Request()
+        request.ticker = "AAPL"
+        request.numberOfShares = "100"
+        request.impliedVolatility = "0.182"
         
         // When
-        let request = ExpectedMove.FetchTicker.Request()
         sut.fetchTicker(request)
         
         // Then
-        XCTAssert(expectedMoveInteractorOutputSpy.presentProfitLossDaysAheadCalled, "FetchTicker() should ask presenter to format expected mover result")
+        XCTAssert(expectedMoveInteractorOutputSpy.presentProfitLossDaysAheadCalled, "FetchTicker() should ask presenter to format expected move result")
     }
 }

@@ -100,8 +100,8 @@ class ExpectedMoveViewControllerTests: XCTestCase
         // Then
         XCTAssert(delegate != nil, "Ticker text field should have a delegate")
     }
-
-    func testFetchTickerCalledWhenTickerTextFieldDidEndEditing()
+    
+    func testFetchTickerCalledWhenCalculateButtonTapped()
     {
         // Given
         let expectedMoveViewControllerOutputSpy = ExpectedMoveViewControllerOutputSpy()
@@ -109,10 +109,10 @@ class ExpectedMoveViewControllerTests: XCTestCase
         
         // When
         loadView()
-        tickerTextFieldDidEndEditing()
+        sut.calculateButtonTapped()
         
         // Then
-        XCTAssert(expectedMoveViewControllerOutputSpy.fetchTickerCalled, "Should fetch ticker when ticker text field ends editing")
+        XCTAssert(expectedMoveViewControllerOutputSpy.fetchTickerCalled, "Should fetch ticker when ticker calculate button tapped")
     }
     
     func testShouldConfigurePriceTextField()

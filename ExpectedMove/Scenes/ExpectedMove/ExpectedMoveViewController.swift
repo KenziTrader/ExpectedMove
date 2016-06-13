@@ -14,6 +14,7 @@ import UIKit
 protocol ExpectedMoveViewControllerInput
 {
     func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
 protocol ExpectedMoveViewControllerOutput
@@ -29,8 +30,11 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     // MARK: Outlets
     
     @IBOutlet weak var tickerTextField: UITextField!
+    @IBOutlet weak var numberOfSharesTextField: UITextField!
+    @IBOutlet weak var impliedVolatilityTextField: UITextField!
     @IBOutlet weak var displayedPriceLabel: UILabel!
     @IBOutlet var profitLosslabels: [UILabel]!
+    @IBOutlet weak var calculateButton: UIButton!
     
     // MARK: Object lifecycle
     
@@ -46,6 +50,16 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     {
         super.viewDidLoad()
         doSomethingOnLoad()
+    }
+    
+    // MARK: Actions
+
+    @IBAction func calculateButtonTapped() {
+        let request = ExpectedMove.FetchTicker.Request(
+            ticker: tickerTextField.text!,
+            numberOfShares: numberOfSharesTextField.text!,
+            impliedVolatility: impliedVolatilityTextField.text!)
+        output.fetchTicker(request)
     }
     
     // MARK: Event handling
@@ -70,12 +84,40 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
             tag += 1
         }
     }
+    
+    private var numberOfTimesNetworkActivityIndicatorSetToVisible = 0
+    func setNetworkActivityIndicatorVisible(visible: Bool) {
+        if visible {
+            numberOfTimesNetworkActivityIndicatorSetToVisible += 1
+        } else {
+            numberOfTimesNetworkActivityIndicatorSetToVisible -= 1
+        }
+        assert(numberOfTimesNetworkActivityIndicatorSetToVisible >= 0 ,
+               "Network activity indicator was asked to hide more often than shown")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = visible
+    }
+
+    func enableOrDisableCalculateButton() {
+        if let ticker = tickerTextField.text,
+            let numberOfShares = numberOfSharesTextField.text,
+            let impliedVolatility = impliedVolatilityTextField.text
+            where ticker != "" && numberOfShares != "" && impliedVolatility != ""
+        {
+            calculateButton.enabled = true
+        } else {
+            calculateButton.enabled = false
+        }
+    }
 }
 
 extension ExpectedMoveViewController: UITextFieldDelegate
 {
     func textFieldDidEndEditing(textField: UITextField) {
-        let request = ExpectedMove.FetchTicker.Request(ticker: textField.text!)
-        output.fetchTicker(request)
+        enableOrDisableCalculateButton()
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        enableOrDisableCalculateButton()
+        return true
     }
 }
