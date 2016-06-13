@@ -50,6 +50,9 @@ class ExpectedMoveInteractorTests: XCTestCase
         {
             presentProfitLossDaysAheadCalled = true
         }
+        
+        func setNetworkActivityIndicatorVisible(visible: Bool) {
+        }
     }
     
     class FetchTickerWorkerSpy: FetchTickerWorker

@@ -43,9 +43,7 @@ class ExpectedMoveInteractor: ExpectedMoveInteractorInput
             fetchTickerWorker.fetchTicker(ticker) {
                 financeData in
                 
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.output.setNetworkActivityIndicatorVisible(false)
-                }
+                self.output.setNetworkActivityIndicatorVisible(false)
                 if let price = financeData.lastTradePrice {
                     
                     let profitLoss =
@@ -59,9 +57,7 @@ class ExpectedMoveInteractor: ExpectedMoveInteractorInput
                     var response = ExpectedMove.FetchTicker.Response()
                     response.price = price
                     response.profitLoss = profitLoss
-                    dispatch_async(dispatch_get_main_queue()) {
-                        self.output.presentProfitLossDaysAhead(response)
-                    }
+                    self.output.presentProfitLossDaysAhead(response)
 
                 } else {
                     print("Query didn't return a valid price")

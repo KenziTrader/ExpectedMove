@@ -85,7 +85,7 @@ class ExpectedMoveViewControllerTests: XCTestCase
 
         return viewModel
     }
-
+    
     // MARK: Tests
     
     func testTickerTextFieldHasExpectedMoveViewControllerAsDelegate()

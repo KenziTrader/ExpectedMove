@@ -61,7 +61,7 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
         }
 
         let viewModel = ExpectedMove.FetchTicker.ViewModel(price: displayedPrice!, expectedProfitLossDaysAhead: displayedProfitLosses)
-        output.displayProfitLossDaysAhead(viewModel)
+            output.displayProfitLossDaysAhead(viewModel)
     }
     
     func setNetworkActivityIndicatorVisible(visible: Bool) {

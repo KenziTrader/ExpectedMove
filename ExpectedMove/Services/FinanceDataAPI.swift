@@ -38,7 +38,9 @@ class FinanceDataAPI: FinanceDataProtocol
                     throw JSONError.NoData
                 }
                 let financeData = try FinanceData().parseYahooJSON(data)
-                completionHandler(financeData: financeData)
+                dispatch_async(dispatch_get_main_queue()) {
+                    completionHandler(financeData: financeData)
+                }
                 
             } catch let error as JSONError {
                 print(error.rawValue)

@@ -54,6 +54,9 @@ class ExpectedMovePresenterTests: XCTestCase
             displayProfitLossDaysAheadCalled = true
             fetchTicketviewModel = viewModel
         }
+        
+        func setNetworkActivityIndicatorVisible(visible: Bool) {
+        }
     }
     
     func sampleResponse() -> ExpectedMove.FetchTicker.Response
@@ -85,8 +88,8 @@ class ExpectedMovePresenterTests: XCTestCase
         
         // Then
         let displayedPrice = expectedMovePresenterOutputSpy.fetchTicketviewModel.price
-        XCTAssertEqual(displayedPrice, "99.90", "Presenting fetched ticker should properly format price")
         let displayedProfitLosses = expectedMovePresenterOutputSpy.fetchTicketviewModel.expectedProfitLossDaysAhead
+        XCTAssertEqual(displayedPrice, "99.90", "Presenting fetched ticker should properly format price")
         for (displayedProfitLoss, expectedProfit) in zip(displayedProfitLosses, expectedProfits) {
             XCTAssertEqual(displayedProfitLoss.loss, "-"+expectedProfit, "Presenting fetched ticker should properly format loss")
             XCTAssertEqual(displayedProfitLoss.profit, "+"+expectedProfit, "Presenting fetched ticker should properly format profit")

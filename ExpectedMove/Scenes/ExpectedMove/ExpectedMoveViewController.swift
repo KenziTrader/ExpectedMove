@@ -66,6 +66,7 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     
     func doSomethingOnLoad()
     {
+        enableOrDisableCalculateButton()
         // NOTE: Ask the Interactor to do some work
     }
     
@@ -75,12 +76,12 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     {
         // NOTE: Display the result from the Presenter
         
-        displayedPriceLabel.text = viewModel.price
+        self.displayedPriceLabel.text = viewModel.price
         var tag = 0
         for profitLoss in viewModel.expectedProfitLossDaysAhead {
-            profitLosslabels[tag].text = profitLoss.loss
+            self.profitLosslabels[tag].text = profitLoss.loss
             tag += 1
-            profitLosslabels[tag].text = profitLoss.profit
+            self.profitLosslabels[tag].text = profitLoss.profit
             tag += 1
         }
     }
