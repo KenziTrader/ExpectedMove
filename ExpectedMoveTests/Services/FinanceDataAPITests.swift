@@ -87,6 +87,7 @@ class FinanceDataAPITests: XCTestCase
         var yearLow: Double = 0
         var yearHigh: Double = 0
         var lastTradeDate = NSDate()
+        var percentChange: Double = 0
         let dateComponents = NSDateComponents()
         dateComponents.timeZone = NSTimeZone(forSecondsFromGMT: 0)
         dateComponents.year = 2016
@@ -103,6 +104,7 @@ class FinanceDataAPITests: XCTestCase
             yearLow = financeData.yearLow!
             yearHigh = financeData.yearHigh!
             lastTradeDate = financeData.lastTradeDate!
+            percentChange = financeData.percentChange!
         }
         
         // Then
@@ -111,6 +113,7 @@ class FinanceDataAPITests: XCTestCase
             XCTAssertEqual(name, "Apple Inc.", "Fetch ticker from API should convert the name correctly from JSON")
             XCTAssertEqual(yearLow, 89.47, "Fetch ticker from API should convert the year low correctly from JSON")
             XCTAssertEqual(yearHigh, 132.97, "Fetch ticker from API should convert the year high correctly from JSON")
+            XCTAssertEqual(percentChange, 0.87/100, "Fetch ticker from API should convert the percent change correctly from JSON")
             XCTAssertEqual(lastTradeDate, expectedDate, "Fetch ticker from API should convert the last trade date correctly from JSON")
         }
     }

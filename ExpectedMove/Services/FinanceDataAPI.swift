@@ -89,9 +89,9 @@ extension FinanceData {
         financeData.marketCapitalization        = string(quote["MarketCapitalization"])
         financeData.EBITDA                      = string(quote["EBITDA"])
         financeData.changeFromYearLow           = double(quote["ChangeFromYearLow"])
-        financeData.percentChangeFromYearLow    = double(quote["PercentChangeFromYearLow"])
+        financeData.percentChangeFromYearLow    = percentToDouble(quote["PercentChangeFromYearLow"])
         financeData.changeFromYearHigh          = double(quote["ChangeFromYearHigh"])
-        financeData.percebtChangeFromYearHigh   = double(quote["PercebtChangeFromYearHigh"])
+        financeData.percebtChangeFromYearHigh   = percentToDouble(quote["PercebtChangeFromYearHigh"])
         financeData.lastTradePrice              = double(quote["LastTradePriceOnly"])
         financeData.highLimit                   = string(quote["HighLimit"])
         financeData.lowLimit                    = string(quote["LowLimit"])
@@ -101,7 +101,7 @@ extension FinanceData {
         financeData.name                        = string(quote["Name"])
         financeData.open                        = double(quote["Open"])
         financeData.previousClose               = double(quote["PreviousClose"])
-        financeData.changeinPercent             = double(quote["ChangeinPercent"])
+        financeData.changeinPercent             = percentToDouble(quote["ChangeinPercent"])
         financeData.priceSales                  = double(quote["PriceSales"])
         financeData.priceBook                   = double(quote["PriceBook"])
         financeData.exDividendDate              = date(quote["ExDividendDate"])
@@ -119,7 +119,7 @@ extension FinanceData {
         financeData.daysValueChange             = double(quote["DaysValueChange"])
         financeData.stockExchange               = string(quote["StockExchange"])
         financeData.dividendYield               = double(quote["DividendYield"])
-        financeData.percentChange               = double(quote["PercentChange"])
+        financeData.percentChange               = percentToDouble(quote["PercentChange"])
        
         
         return financeData
@@ -132,7 +132,11 @@ extension FinanceData {
     private func int(x: AnyObject?) -> Int? {
         return (x as? String)?.asInt()
     }
-
+    
+    private func percentToDouble(x: AnyObject?) -> Double? {
+        return (x as? String)?.percentToDouble()
+    }
+    
     private func string(x: AnyObject?) -> String? {
         return x as? String
     }
@@ -156,6 +160,8 @@ extension String {
         Static.numberFormatter.usesGroupingSeparator = true
         Static.numberFormatter.groupingSeparator = ","
         Static.numberFormatter.groupingSize = 3
+        Static.numberFormatter.positivePrefix = ""
+        Static.numberFormatter.numberStyle = .DecimalStyle
         return Static.numberFormatter.numberFromString(self)?.doubleValue
     }
 
@@ -163,6 +169,7 @@ extension String {
         // use right decimal separator
         Static.numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
         Static.numberFormatter.numberStyle = .PercentStyle
+        Static.numberFormatter.positivePrefix = "+"
         return Static.numberFormatter.numberFromString(self)?.doubleValue
     }
 
