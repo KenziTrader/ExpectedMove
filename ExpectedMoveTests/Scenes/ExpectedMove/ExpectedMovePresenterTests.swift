@@ -44,22 +44,29 @@ class ExpectedMovePresenterTests: XCTestCase
     {
         // MARK: Method call expectations
         var displayProfitLossDaysAheadCalled = false
+        var displayStockAutoCompleteCalled = false
         
         // MARK: Argument expectations
-        var fetchTicketviewModel: ExpectedMove.FetchTicker.ViewModel!
+        var fetchTickerViewModel: ExpectedMove.FetchTicker.ViewModel!
+        var autoCompleteViewModel: ExpectedMove.AutoComplete.ViewModel!
         
         // MARK: Spied methods
         func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
         {
             displayProfitLossDaysAheadCalled = true
-            fetchTicketviewModel = viewModel
+            fetchTickerViewModel = viewModel
+        }
+        
+        func displayStockAutoComplete(viewModel: ExpectedMove.AutoComplete.ViewModel) {
+            displayStockAutoCompleteCalled = true
+            autoCompleteViewModel = viewModel
         }
         
         func setNetworkActivityIndicatorVisible(visible: Bool) {
         }
     }
     
-    func sampleResponse() -> ExpectedMove.FetchTicker.Response
+    func sampleFetchTickerResponse() -> ExpectedMove.FetchTicker.Response
     {
         let numberOfShares = 100
         let impliedVolatility = 19.7 / 100
@@ -80,15 +87,15 @@ class ExpectedMovePresenterTests: XCTestCase
         let expectedMovePresenterOutputSpy = ExpectedMovePresenterOutputSpy()
         sut.output = expectedMovePresenterOutputSpy
         
-        let response = sampleResponse()
+        let response = sampleFetchTickerResponse()
         let expectedProfits = ["103", "146", "178", "273"]
         
         // When
         sut.presentProfitLossDaysAhead(response)
         
         // Then
-        let displayedPrice = expectedMovePresenterOutputSpy.fetchTicketviewModel.price
-        let displayedProfitLosses = expectedMovePresenterOutputSpy.fetchTicketviewModel.expectedProfitLossDaysAhead
+        let displayedPrice = expectedMovePresenterOutputSpy.fetchTickerViewModel.price
+        let displayedProfitLosses = expectedMovePresenterOutputSpy.fetchTickerViewModel.expectedProfitLossDaysAhead
         XCTAssertEqual(displayedPrice, "99.90", "Presenting fetched ticker should properly format price")
         for (displayedProfitLoss, expectedProfit) in zip(displayedProfitLosses, expectedProfits) {
             XCTAssertEqual(displayedProfitLoss.loss, "-"+expectedProfit, "Presenting fetched ticker should properly format loss")
@@ -99,16 +106,30 @@ class ExpectedMovePresenterTests: XCTestCase
     func testPresentFetchTickerShouldAskViewControllerToDisplayPriceAndProfitLoss()
     {
         // Given
-        // Given
         let expectedMovePresenterOutputSpy = ExpectedMovePresenterOutputSpy()
         sut.output = expectedMovePresenterOutputSpy
         
-        let response = sampleResponse()
+        let response = sampleFetchTickerResponse()
         
         // When
         sut.presentProfitLossDaysAhead(response)
         
         // Then
         XCTAssert(expectedMovePresenterOutputSpy.displayProfitLossDaysAheadCalled, "Presenting fetched ticker should ask the view controller to display them")
+    }
+    
+    func testPresentAutoCompleteShouldAskViewControllerToDisplayAutoCompleResults()
+    {
+        // Given
+        let expectedMovePresenterOutputSpy = ExpectedMovePresenterOutputSpy()
+        sut.output = expectedMovePresenterOutputSpy
+        
+        let response = ExpectedMove.AutoComplete.Response()
+        
+        // When
+        sut.presentStockAutoComplete(response)
+        
+        // Then
+        XCTAssert(expectedMovePresenterOutputSpy.displayStockAutoCompleteCalled, "Presenting auto complete results should ask the view controller to display them")
     }
 }

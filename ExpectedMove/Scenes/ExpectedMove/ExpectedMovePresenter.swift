@@ -15,11 +15,13 @@ protocol ExpectedMovePresenterInput
 {
     func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
     func setNetworkActivityIndicatorVisible(visible: Bool)
+    func presentStockAutoComplete(response: ExpectedMove.AutoComplete.Response)
 }
 
 protocol ExpectedMovePresenterOutput: class
 {
     func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func displayStockAutoComplete(viewModel: ExpectedMove.AutoComplete.ViewModel)
     func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
@@ -53,6 +55,7 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
         let displayedPrice = priceFormatter.stringFromNumber(price)
         
         var displayedProfitLosses: [ExpectedMove.FetchTicker.DisplayedProfitLoss] = []
+
         for profitLoss in response.profitLoss {
             let loss = profitLossFormatter.stringFromNumber(profitLoss.loss)
             let profit = profitLossFormatter.stringFromNumber(profitLoss.profit)
@@ -61,10 +64,36 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
         }
 
         let viewModel = ExpectedMove.FetchTicker.ViewModel(price: displayedPrice!, expectedProfitLossDaysAhead: displayedProfitLosses)
-            output.displayProfitLossDaysAhead(viewModel)
+        output.displayProfitLossDaysAhead(viewModel)
     }
     
     func setNetworkActivityIndicatorVisible(visible: Bool) {
         output.setNetworkActivityIndicatorVisible(visible)
+    }
+    
+    func presentStockAutoComplete(response: ExpectedMove.AutoComplete.Response)
+    {
+        // NOTE: Format the response from the Interactor and pass the result back to the View Controller
+        
+        var displayedAutoCompleteResults: [ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult] = []
+        
+        let selectedRange = NSMakeRange(0, response.searchTerm.characters.count)
+        let font = UIFont(name: "Helvetica-Bold", size: 12.0)
+        
+        for autoCompleteResult in response.autoCompleteResults {
+            
+            let symbol = NSMutableAttributedString(string: autoCompleteResult.symbol!)
+            symbol.beginEditing()
+            symbol.addAttribute(NSFontAttributeName, value: font!, range: selectedRange)
+            symbol.endEditing()
+
+            let name = NSAttributedString(string: autoCompleteResult.name!)
+
+            let displayedAutoCompleteResult = ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult(ticker: symbol, name: name)
+            displayedAutoCompleteResults.append(displayedAutoCompleteResult)
+        }
+        
+        let viewModel = ExpectedMove.AutoComplete.ViewModel(autoCompleteResults: displayedAutoCompleteResults)
+        output.displayStockAutoComplete(viewModel)
     }
 }

@@ -14,6 +14,8 @@
 		A70FC27E1D09C47500A206A0 /* FetchTickerWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */; };
 		A70FC2801D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC27F1D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift */; };
 		A70FC2821D09DB2700A206A0 /* CalculateExpectedMoveWorkerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70FC2811D09DB2700A206A0 /* CalculateExpectedMoveWorkerTest.swift */; };
+		A71FACD41D25185200C7DEA8 /* NetworkActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FACD31D25185200C7DEA8 /* NetworkActivityIndicator.swift */; };
+		A71FACD61D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71FACD51D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift */; };
 		A731E9971D08695C001A3AC2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9961D08695C001A3AC2 /* AppDelegate.swift */; };
 		A731E99C1D08695C001A3AC2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A731E99A1D08695C001A3AC2 /* Main.storyboard */; };
 		A731E99E1D08695C001A3AC2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A731E99D1D08695C001A3AC2 /* Assets.xcassets */; };
@@ -30,7 +32,15 @@
 		A731E9DA1D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D61D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift */; };
 		A731E9DB1D086B18001A3AC2 /* ExpectedMovePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */; };
 		A731E9DC1D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */; };
+		A73271B01D23E2A700CF36BE /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */; };
 		A740A0B31D0D97CF009182EF /* FinanceDataAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A740A0B21D0D97CF009182EF /* FinanceDataAPITests.swift */; };
+		A7B1BA7C1D22805E0069A01D /* StockAutoCompleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA7B1D22805E0069A01D /* StockAutoCompleteResult.swift */; };
+		A7B1BA7E1D2280F90069A01D /* StockAutoCompleteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA7D1D2280F90069A01D /* StockAutoCompleteAPI.swift */; };
+		A7B1BA801D2281930069A01D /* KTURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA7F1D2281930069A01D /* KTURLSession.swift */; };
+		A7B1BA831D22826C0069A01D /* KTString.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA821D22826C0069A01D /* KTString.swift */; };
+		A7B1BA851D2283190069A01D /* StockAutoCompleteWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA841D2283190069A01D /* StockAutoCompleteWorker.swift */; };
+		A7B1BA871D22856F0069A01D /* StockAutoCompleteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA861D22856F0069A01D /* StockAutoCompleteTests.swift */; };
+		A7B1BA891D22910D0069A01D /* StockAutoCompleteWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA881D22910D0069A01D /* StockAutoCompleteWorkerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +68,8 @@
 		A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FetchTickerWorkerTests.swift; path = Workers/FetchTickerWorkerTests.swift; sourceTree = "<group>"; };
 		A70FC27F1D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculateExpectedMoveWorker.swift; path = Workers/CalculateExpectedMoveWorker.swift; sourceTree = "<group>"; };
 		A70FC2811D09DB2700A206A0 /* CalculateExpectedMoveWorkerTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CalculateExpectedMoveWorkerTest.swift; path = Workers/CalculateExpectedMoveWorkerTest.swift; sourceTree = "<group>"; };
+		A71FACD31D25185200C7DEA8 /* NetworkActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkActivityIndicator.swift; path = Views/NetworkActivityIndicator.swift; sourceTree = "<group>"; };
+		A71FACD51D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TickerAutoCompleteTextField.swift; path = Views/TickerAutoCompleteTextField.swift; sourceTree = "<group>"; };
 		A731E9931D08695B001A3AC2 /* ExpectedMove.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpectedMove.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A731E9961D08695C001A3AC2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A731E99B1D08695C001A3AC2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -80,7 +92,15 @@
 		A731E9D61D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveInteractorTests.swift; path = Scenes/ExpectedMove/ExpectedMoveInteractorTests.swift; sourceTree = "<group>"; };
 		A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMovePresenterTests.swift; path = Scenes/ExpectedMove/ExpectedMovePresenterTests.swift; sourceTree = "<group>"; };
 		A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveViewControllerTests.swift; path = Scenes/ExpectedMove/ExpectedMoveViewControllerTests.swift; sourceTree = "<group>"; };
+		A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoCompleteTextField.swift; path = Views/AutoCompleteTextField.swift; sourceTree = "<group>"; };
 		A740A0B21D0D97CF009182EF /* FinanceDataAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceDataAPITests.swift; path = Services/FinanceDataAPITests.swift; sourceTree = "<group>"; };
+		A7B1BA7B1D22805E0069A01D /* StockAutoCompleteResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteResult.swift; path = Models/StockAutoCompleteResult.swift; sourceTree = "<group>"; };
+		A7B1BA7D1D2280F90069A01D /* StockAutoCompleteAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteAPI.swift; path = Services/StockAutoCompleteAPI.swift; sourceTree = "<group>"; };
+		A7B1BA7F1D2281930069A01D /* KTURLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KTURLSession.swift; path = Util/KTURLSession.swift; sourceTree = "<group>"; };
+		A7B1BA821D22826C0069A01D /* KTString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KTString.swift; path = Util/KTString.swift; sourceTree = "<group>"; };
+		A7B1BA841D2283190069A01D /* StockAutoCompleteWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteWorker.swift; path = Workers/StockAutoCompleteWorker.swift; sourceTree = "<group>"; };
+		A7B1BA861D22856F0069A01D /* StockAutoCompleteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteTests.swift; path = Services/StockAutoCompleteTests.swift; sourceTree = "<group>"; };
+		A7B1BA881D22910D0069A01D /* StockAutoCompleteWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteWorkerTests.swift; path = Workers/StockAutoCompleteWorkerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +133,7 @@
 			children = (
 				A70FC26B1D09753000A206A0 /* FetchTickerWorker.swift */,
 				A70FC27F1D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift */,
+				A7B1BA841D2283190069A01D /* StockAutoCompleteWorker.swift */,
 			);
 			name = Workers;
 			sourceTree = "<group>";
@@ -122,6 +143,7 @@
 			children = (
 				A70FC2701D09C01100A206A0 /* FinanceDataFromMemory.swift */,
 				A70FC2721D09C0A500A206A0 /* FinanceDataAPI.swift */,
+				A7B1BA7D1D2280F90069A01D /* StockAutoCompleteAPI.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -130,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				A70FC26E1D098E1000A206A0 /* FinanceData.swift */,
+				A7B1BA7B1D22805E0069A01D /* StockAutoCompleteResult.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -139,6 +162,7 @@
 			children = (
 				A70FC27D1D09C47500A206A0 /* FetchTickerWorkerTests.swift */,
 				A70FC2811D09DB2700A206A0 /* CalculateExpectedMoveWorkerTest.swift */,
+				A7B1BA881D22910D0069A01D /* StockAutoCompleteWorkerTests.swift */,
 			);
 			name = Workers;
 			sourceTree = "<group>";
@@ -166,15 +190,17 @@
 		A731E9951D08695C001A3AC2 /* ExpectedMove */ = {
 			isa = PBXGroup;
 			children = (
+				A731E9961D08695C001A3AC2 /* AppDelegate.swift */,
+				A731E99D1D08695C001A3AC2 /* Assets.xcassets */,
+				A731E9A21D08695C001A3AC2 /* Info.plist */,
+				A731E99F1D08695C001A3AC2 /* LaunchScreen.storyboard */,
+				A731E99A1D08695C001A3AC2 /* Main.storyboard */,
 				A70FC26D1D098D8B00A206A0 /* Models */,
 				A731E9C41D086A73001A3AC2 /* Scenes */,
 				A70FC26A1D0974E900A206A0 /* Services */,
+				A7B1BA811D22820A0069A01D /* Util */,
+				A73271AE1D23E20D00CF36BE /* Views */,
 				A70FC2691D0974D800A206A0 /* Workers */,
-				A731E9961D08695C001A3AC2 /* AppDelegate.swift */,
-				A731E99A1D08695C001A3AC2 /* Main.storyboard */,
-				A731E99D1D08695C001A3AC2 /* Assets.xcassets */,
-				A731E99F1D08695C001A3AC2 /* LaunchScreen.storyboard */,
-				A731E9A21D08695C001A3AC2 /* Info.plist */,
 			);
 			path = ExpectedMove;
 			sourceTree = "<group>";
@@ -240,12 +266,32 @@
 			name = ExpectedMove;
 			sourceTree = "<group>";
 		};
+		A73271AE1D23E20D00CF36BE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */,
+				A71FACD31D25185200C7DEA8 /* NetworkActivityIndicator.swift */,
+				A71FACD51D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		A740A0B11D0D953F009182EF /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				A740A0B21D0D97CF009182EF /* FinanceDataAPITests.swift */,
+				A7B1BA861D22856F0069A01D /* StockAutoCompleteTests.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		A7B1BA811D22820A0069A01D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A7B1BA7F1D2281930069A01D /* KTURLSession.swift */,
+				A7B1BA821D22826C0069A01D /* KTString.swift */,
+			);
+			name = Util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,8 +427,11 @@
 			files = (
 				A731E9CD1D086ABE001A3AC2 /* ExpectedMoveConfigurator.swift in Sources */,
 				A731E9CF1D086ABE001A3AC2 /* ExpectedMoveModels.swift in Sources */,
+				A71FACD61D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift in Sources */,
 				A731E9D01D086ABE001A3AC2 /* ExpectedMovePresenter.swift in Sources */,
+				A7B1BA801D2281930069A01D /* KTURLSession.swift in Sources */,
 				A70FC2731D09C0A500A206A0 /* FinanceDataAPI.swift in Sources */,
+				A71FACD41D25185200C7DEA8 /* NetworkActivityIndicator.swift in Sources */,
 				A731E9D11D086ABE001A3AC2 /* ExpectedMoveRouter.swift in Sources */,
 				A731E9D31D086ABE001A3AC2 /* ExpectedMoveWorker.swift in Sources */,
 				A70FC2711D09C01100A206A0 /* FinanceDataFromMemory.swift in Sources */,
@@ -390,8 +439,13 @@
 				A731E9971D08695C001A3AC2 /* AppDelegate.swift in Sources */,
 				A70FC2801D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift in Sources */,
 				A731E9D21D086ABE001A3AC2 /* ExpectedMoveViewController.swift in Sources */,
+				A7B1BA7C1D22805E0069A01D /* StockAutoCompleteResult.swift in Sources */,
+				A7B1BA7E1D2280F90069A01D /* StockAutoCompleteAPI.swift in Sources */,
+				A7B1BA851D2283190069A01D /* StockAutoCompleteWorker.swift in Sources */,
 				A70FC26F1D098E1000A206A0 /* FinanceData.swift in Sources */,
+				A7B1BA831D22826C0069A01D /* KTString.swift in Sources */,
 				A731E9CE1D086ABE001A3AC2 /* ExpectedMoveInteractor.swift in Sources */,
+				A73271B01D23E2A700CF36BE /* AutoCompleteTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -399,6 +453,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7B1BA871D22856F0069A01D /* StockAutoCompleteTests.swift in Sources */,
 				A731E9DB1D086B18001A3AC2 /* ExpectedMovePresenterTests.swift in Sources */,
 				A70FC27E1D09C47500A206A0 /* FetchTickerWorkerTests.swift in Sources */,
 				A740A0B31D0D97CF009182EF /* FinanceDataAPITests.swift in Sources */,
@@ -406,6 +461,7 @@
 				A70FC2821D09DB2700A206A0 /* CalculateExpectedMoveWorkerTest.swift in Sources */,
 				A731E9DA1D086B18001A3AC2 /* ExpectedMoveInteractorTests.swift in Sources */,
 				A731E9DC1D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift in Sources */,
+				A7B1BA891D22910D0069A01D /* StockAutoCompleteWorkerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

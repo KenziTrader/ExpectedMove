@@ -14,12 +14,14 @@ import UIKit
 protocol ExpectedMoveInteractorInput
 {
     func fetchTicker(request: ExpectedMove.FetchTicker.Request)
+    func autoComplete(request: ExpectedMove.AutoComplete.Request)
 }
 
 protocol ExpectedMoveInteractorOutput
 {
     func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
     func setNetworkActivityIndicatorVisible(visible: Bool)
+    func presentStockAutoComplete(response: ExpectedMove.AutoComplete.Response)
 }
 
 class ExpectedMoveInteractor: ExpectedMoveInteractorInput
@@ -27,6 +29,7 @@ class ExpectedMoveInteractor: ExpectedMoveInteractorInput
     var output: ExpectedMoveInteractorOutput!
     var fetchTickerWorker = FetchTickerWorker(financeDataService: FinanceDataAPI())
     var calculateExpectedMoveWorker = CalculateExpectedMoveWorker()
+    var autoCompleteWorker = StockAutoCompleteWorker(stockAutoCompleteService: StockAutoCompleteAPI())
     
     // MARK: Business logic
     
@@ -65,5 +68,19 @@ class ExpectedMoveInteractor: ExpectedMoveInteractorInput
             }
             output.setNetworkActivityIndicatorVisible(true)
         }
+    }
+    
+    func autoComplete(request: ExpectedMove.AutoComplete.Request) {
+
+        let ticker = request.ticker
+
+        // NOTE: Ask the Worker to do the work
+        
+        autoCompleteWorker.stockAutoComplete(ticker) { (stockAutoComplete) in
+            self.output.setNetworkActivityIndicatorVisible(false)
+            let response = ExpectedMove.AutoComplete.Response(searchTerm: ticker, autoCompleteResults: stockAutoComplete)
+            self.output.presentStockAutoComplete(response)
+        }
+        output.setNetworkActivityIndicatorVisible(true)
     }
 }

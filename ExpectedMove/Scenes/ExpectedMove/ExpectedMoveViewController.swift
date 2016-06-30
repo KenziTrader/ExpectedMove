@@ -14,22 +14,26 @@ import UIKit
 protocol ExpectedMoveViewControllerInput
 {
     func displayProfitLossDaysAhead(viewModel: ExpectedMove.FetchTicker.ViewModel)
+    func displayStockAutoComplete(viewModel: ExpectedMove.AutoComplete.ViewModel)
     func setNetworkActivityIndicatorVisible(visible: Bool)
 }
 
 protocol ExpectedMoveViewControllerOutput
 {
     func fetchTicker(request: ExpectedMove.FetchTicker.Request)
+    func autoComplete(request: ExpectedMove.AutoComplete.Request)
 }
 
-class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControllerInput
+class ExpectedMoveViewController: UIViewController, ExpectedMoveViewControllerInput
 {
     var output: ExpectedMoveViewControllerOutput!
     var router: ExpectedMoveRouter!
     
+    private var autoCompleteResults: [ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult] = []
+    
     // MARK: Outlets
     
-    @IBOutlet weak var tickerTextField: UITextField!
+    @IBOutlet weak var tickerTextField: TickerAutoCompleteTextField!
     @IBOutlet weak var numberOfSharesTextField: UITextField!
     @IBOutlet weak var impliedVolatilityTextField: UITextField!
     @IBOutlet weak var displayedPriceLabel: UILabel!
@@ -67,7 +71,25 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
     func doSomethingOnLoad()
     {
         enableOrDisableCalculateButton()
+        tickerTextField.configureTextField()
+        handleTextFieldInterfaces()
         // NOTE: Ask the Interactor to do some work
+    }
+    
+    private func handleTextFieldInterfaces()
+    {
+        tickerTextField.onTextChange = {[weak self] text in
+            if !text.isEmpty {
+                let request = ExpectedMove.AutoComplete.Request(ticker: text)
+                self?.output.autoComplete(request)
+            }
+        }
+        
+        tickerTextField.onSelect = {[weak self] text, indexpath in
+            let ticker = self?.autoCompleteResults[indexpath.row].ticker
+            self?.tickerTextField.text = ticker?.string
+            print("\(text), \(indexpath)")
+        }
     }
     
     // MARK: Display logic
@@ -86,16 +108,15 @@ class ExpectedMoveViewController: UITableViewController, ExpectedMoveViewControl
         }
     }
     
-    private var numberOfTimesNetworkActivityIndicatorSetToVisible = 0
+    func displayStockAutoComplete(viewModel: ExpectedMove.AutoComplete.ViewModel)
+    {
+        // NOTE: Display the result from the Presenter
+        autoCompleteResults = viewModel.autoCompleteResults
+        tickerTextField.autoCompleteStrings = autoCompleteResults.map({$0.ticker.string + "\t" + $0.name.string})
+    }
+    
     func setNetworkActivityIndicatorVisible(visible: Bool) {
-        if visible {
-            numberOfTimesNetworkActivityIndicatorSetToVisible += 1
-        } else {
-            numberOfTimesNetworkActivityIndicatorSetToVisible -= 1
-        }
-        assert(numberOfTimesNetworkActivityIndicatorSetToVisible >= 0 ,
-               "Network activity indicator was asked to hide more often than shown")
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = visible
+        NetworkActivityIndicator.setVisible(visible)
     }
 
     func enableOrDisableCalculateButton() {
@@ -119,6 +140,10 @@ extension ExpectedMoveViewController: UITextFieldDelegate
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         enableOrDisableCalculateButton()
+        if let ticker = textField.text {
+            let request = ExpectedMove.AutoComplete.Request(ticker: ticker)
+            output.autoComplete(request)
+        }
         return true
     }
 }
