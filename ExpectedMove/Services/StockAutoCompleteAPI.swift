@@ -33,9 +33,9 @@ class StockAutoCompleteAPI
                 }
                 
             } catch let error as JSONError {
-                print(error.rawValue)
+                print("\(self.dynamicType).\(#function): \(error.rawValue)")
             } catch let error as NSError {
-                print(error.debugDescription)
+                print("\(self.dynamicType).\(#function): \(error.debugDescription)")
             }
             }
         dataTask?.resume()
