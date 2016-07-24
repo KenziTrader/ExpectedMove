@@ -57,7 +57,7 @@ class ExpectedMoveViewController: UIViewController, ExpectedMoveViewControllerIn
     }
     
     // MARK: Actions
-
+    
     @IBAction func calculateButtonTapped() {
         let request = ExpectedMove.FetchTicker.Request(
             ticker: tickerTextField.text!,
@@ -71,24 +71,37 @@ class ExpectedMoveViewController: UIViewController, ExpectedMoveViewControllerIn
     func doSomethingOnLoad()
     {
         enableOrDisableCalculateButton()
-        tickerTextField.configureTextField()
+        tickerTextField.setup()
         handleTextFieldInterfaces()
         // NOTE: Ask the Interactor to do some work
     }
     
     private func handleTextFieldInterfaces()
     {
-        tickerTextField.onTextChange = {[weak self] text in
+        tickerTextField.onTextChange = { [weak self] text in
             if !text.isEmpty {
                 let request = ExpectedMove.AutoComplete.Request(ticker: text)
                 self?.output.autoComplete(request)
             }
         }
         
-        tickerTextField.onSelect = {[weak self] text, indexpath in
+        tickerTextField.onSelect = { [weak self] text, indexpath in
             let ticker = self?.autoCompleteResults[indexpath.row].ticker
-            self?.tickerTextField.text = ticker?.string
+            self?.tickerTextField.text = ticker
             print("\(text), \(indexpath)")
+        }
+        
+        tickerTextField.configureCell = { [weak self] tableView, indexPath in
+            
+            let cellIdentifier = "autocompleteCellIdentifier"
+            var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? AutoCompleteTwoColumnTableViewCell
+            if cell == nil {
+                cell = AutoCompleteTwoColumnTableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
+            }
+
+            self?.tickerTextField.configure(cell!, indexPath: indexPath)
+
+            return cell!
         }
     }
     
@@ -112,13 +125,14 @@ class ExpectedMoveViewController: UIViewController, ExpectedMoveViewControllerIn
     {
         // NOTE: Display the result from the Presenter
         autoCompleteResults = viewModel.autoCompleteResults
-        tickerTextField.autoCompleteStrings = autoCompleteResults.map({$0.ticker.string + "\t" + $0.name.string})
+        tickerTextField.descriptionStrings = autoCompleteResults.map({ $0.name })
+        tickerTextField.autoCompleteStrings = autoCompleteResults.map({ $0.ticker })
     }
     
     func setNetworkActivityIndicatorVisible(visible: Bool) {
         NetworkActivityIndicator.setVisible(visible)
     }
-
+    
     func enableOrDisableCalculateButton() {
         if let ticker = tickerTextField.text,
             let numberOfShares = numberOfSharesTextField.text,
@@ -138,7 +152,8 @@ extension ExpectedMoveViewController: UITextFieldDelegate
         enableOrDisableCalculateButton()
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+    {
         enableOrDisableCalculateButton()
         if let ticker = textField.text {
             let request = ExpectedMove.AutoComplete.Request(ticker: ticker)

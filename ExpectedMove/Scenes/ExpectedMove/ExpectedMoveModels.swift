@@ -44,8 +44,8 @@ struct ExpectedMove {
             var autoCompleteResults = [DisplayedStockAutoCompleteResult]()
         }
         struct DisplayedStockAutoCompleteResult {
-            var ticker: NSAttributedString
-            var name: NSAttributedString
+            var ticker: String
+            var name: String
         }
     }
 }

@@ -33,6 +33,7 @@
 		A731E9DB1D086B18001A3AC2 /* ExpectedMovePresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */; };
 		A731E9DC1D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */; };
 		A73271B01D23E2A700CF36BE /* AutoCompleteTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */; };
+		A733994E1D43F1760009A800 /* AutoCompleteTwoColumnTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A733994D1D43F1760009A800 /* AutoCompleteTwoColumnTableViewCell.swift */; };
 		A740A0B31D0D97CF009182EF /* FinanceDataAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A740A0B21D0D97CF009182EF /* FinanceDataAPITests.swift */; };
 		A7B1BA7C1D22805E0069A01D /* StockAutoCompleteResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA7B1D22805E0069A01D /* StockAutoCompleteResult.swift */; };
 		A7B1BA7E1D2280F90069A01D /* StockAutoCompleteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7B1BA7D1D2280F90069A01D /* StockAutoCompleteAPI.swift */; };
@@ -93,6 +94,7 @@
 		A731E9D71D086B18001A3AC2 /* ExpectedMovePresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMovePresenterTests.swift; path = Scenes/ExpectedMove/ExpectedMovePresenterTests.swift; sourceTree = "<group>"; };
 		A731E9D81D086B18001A3AC2 /* ExpectedMoveViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExpectedMoveViewControllerTests.swift; path = Scenes/ExpectedMove/ExpectedMoveViewControllerTests.swift; sourceTree = "<group>"; };
 		A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoCompleteTextField.swift; path = Views/AutoCompleteTextField.swift; sourceTree = "<group>"; };
+		A733994D1D43F1760009A800 /* AutoCompleteTwoColumnTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutoCompleteTwoColumnTableViewCell.swift; path = Views/AutoCompleteTwoColumnTableViewCell.swift; sourceTree = "<group>"; };
 		A740A0B21D0D97CF009182EF /* FinanceDataAPITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FinanceDataAPITests.swift; path = Services/FinanceDataAPITests.swift; sourceTree = "<group>"; };
 		A7B1BA7B1D22805E0069A01D /* StockAutoCompleteResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteResult.swift; path = Models/StockAutoCompleteResult.swift; sourceTree = "<group>"; };
 		A7B1BA7D1D2280F90069A01D /* StockAutoCompleteAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StockAutoCompleteAPI.swift; path = Services/StockAutoCompleteAPI.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				A73271AF1D23E2A700CF36BE /* AutoCompleteTextField.swift */,
+				A733994D1D43F1760009A800 /* AutoCompleteTwoColumnTableViewCell.swift */,
 				A71FACD31D25185200C7DEA8 /* NetworkActivityIndicator.swift */,
 				A71FACD51D2528D900C7DEA8 /* TickerAutoCompleteTextField.swift */,
 			);
@@ -435,6 +438,7 @@
 				A731E9D11D086ABE001A3AC2 /* ExpectedMoveRouter.swift in Sources */,
 				A731E9D31D086ABE001A3AC2 /* ExpectedMoveWorker.swift in Sources */,
 				A70FC2711D09C01100A206A0 /* FinanceDataFromMemory.swift in Sources */,
+				A733994E1D43F1760009A800 /* AutoCompleteTwoColumnTableViewCell.swift in Sources */,
 				A70FC26C1D09753000A206A0 /* FetchTickerWorker.swift in Sources */,
 				A731E9971D08695C001A3AC2 /* AppDelegate.swift in Sources */,
 				A70FC2801D09D9BE00A206A0 /* CalculateExpectedMoveWorker.swift in Sources */,

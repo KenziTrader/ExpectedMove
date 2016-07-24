@@ -77,19 +77,14 @@ class ExpectedMovePresenter: ExpectedMovePresenterInput
         
         var displayedAutoCompleteResults: [ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult] = []
         
-        let selectedRange = NSMakeRange(0, response.searchTerm.characters.count)
-        let font = UIFont(name: "Helvetica-Bold", size: 12.0)
-        
-        for autoCompleteResult in response.autoCompleteResults {
-            
-            let symbol = NSMutableAttributedString(string: autoCompleteResult.symbol!)
-            symbol.beginEditing()
-            symbol.addAttribute(NSFontAttributeName, value: font!, range: selectedRange)
-            symbol.endEditing()
+        // loop over all non-option autocomplete results
+        for autoCompleteResult in response.autoCompleteResults where autoCompleteResult.type != "Option"
+        {
+            let symbol = autoCompleteResult.symbol!
+            let name = autoCompleteResult.name!
 
-            let name = NSAttributedString(string: autoCompleteResult.name!)
-
-            let displayedAutoCompleteResult = ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult(ticker: symbol, name: name)
+            let displayedAutoCompleteResult =
+                ExpectedMove.AutoComplete.DisplayedStockAutoCompleteResult(ticker: symbol, name: name)
             displayedAutoCompleteResults.append(displayedAutoCompleteResult)
         }
         
