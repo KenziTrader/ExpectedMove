@@ -95,19 +95,6 @@ class ExpectedMoveViewControllerTests: XCTestCase
     
     // MARK: Tests
     
-    func testTickerTextFieldHasExpectedMoveViewControllerAsDelegate()
-    {
-        // Given
-        
-        // When
-        loadView()
-        let delegate = sut.tickerTextField.delegate
-//        let expectedMoveViewControllerIsDelegate = delegate? == (sut as UITextFieldDelegate)
-        
-        // Then
-        XCTAssert(delegate != nil, "Ticker text field should have a delegate")
-    }
-    
     func testFetchTickerCalledWhenCalculateButtonTapped()
     {
         // Given
