@@ -8,18 +8,6 @@
 
 import Foundation
 
-enum JSONError: String, ErrorType {
-    case NoData = "ERROR: no data"
-    case ConversionFailed = "ERROR: conversion from JSON failed"
-}
-
-protocol KTURLSession {
-    func dataTaskWithRequest(request: NSURLRequest,
-                             completionHandler: (NSData?, NSURLResponse?, NSError?) -> Void) -> NSURLSessionDataTask
-}
-
-extension NSURLSession: KTURLSession { }
-
 class FinanceDataAPI: FinanceDataProtocol
 {
     lazy var session: KTURLSession = NSURLSession.sharedSession()
@@ -89,9 +77,9 @@ extension FinanceData {
         financeData.marketCapitalization        = string(quote["MarketCapitalization"])
         financeData.EBITDA                      = string(quote["EBITDA"])
         financeData.changeFromYearLow           = double(quote["ChangeFromYearLow"])
-        financeData.percentChangeFromYearLow    = percentToDouble(quote["PercentChangeFromYearLow"])
+        financeData.percentChangeFromYearLow    = double(quote["PercentChangeFromYearLow"])
         financeData.changeFromYearHigh          = double(quote["ChangeFromYearHigh"])
-        financeData.percebtChangeFromYearHigh   = percentToDouble(quote["PercebtChangeFromYearHigh"])
+        financeData.percebtChangeFromYearHigh   = double(quote["PercebtChangeFromYearHigh"])
         financeData.lastTradePrice              = double(quote["LastTradePriceOnly"])
         financeData.highLimit                   = string(quote["HighLimit"])
         financeData.lowLimit                    = string(quote["LowLimit"])
@@ -101,7 +89,7 @@ extension FinanceData {
         financeData.name                        = string(quote["Name"])
         financeData.open                        = double(quote["Open"])
         financeData.previousClose               = double(quote["PreviousClose"])
-        financeData.changeinPercent             = percentToDouble(quote["ChangeinPercent"])
+        financeData.changeinPercent             = double(quote["ChangeinPercent"])
         financeData.priceSales                  = double(quote["PriceSales"])
         financeData.priceBook                   = double(quote["PriceBook"])
         financeData.exDividendDate              = date(quote["ExDividendDate"])
@@ -119,7 +107,7 @@ extension FinanceData {
         financeData.daysValueChange             = double(quote["DaysValueChange"])
         financeData.stockExchange               = string(quote["StockExchange"])
         financeData.dividendYield               = double(quote["DividendYield"])
-        financeData.percentChange               = percentToDouble(quote["PercentChange"])
+        financeData.percentChange               = double(quote["PercentChange"])
        
         
         return financeData
@@ -132,63 +120,13 @@ extension FinanceData {
     private func int(x: AnyObject?) -> Int? {
         return (x as? String)?.asInt()
     }
-    
-    private func percentToDouble(x: AnyObject?) -> Double? {
-        return (x as? String)?.percentToDouble()
-    }
-    
+
     private func string(x: AnyObject?) -> String? {
         return x as? String
     }
 
     private func date(x: AnyObject?) -> NSDate? {
         return (x as? String)?.asDate()
-    }
-}
-
-extension String {
-
-    // create formatters only once
-    struct Static {
-        static let numberFormatter = NSNumberFormatter()
-        static let nsDateFormatter = NSDateFormatter()
-    }
-
-    func asDouble() -> Double? {
-        // use right decimal separator
-        Static.numberFormatter.decimalSeparator = "."
-        Static.numberFormatter.usesGroupingSeparator = true
-        Static.numberFormatter.groupingSeparator = ","
-        Static.numberFormatter.groupingSize = 3
-        Static.numberFormatter.positivePrefix = ""
-        Static.numberFormatter.numberStyle = .DecimalStyle
-        return Static.numberFormatter.numberFromString(self)?.doubleValue
-    }
-
-    func percentToDouble() -> Double? {
-        // use right decimal separator
-        Static.numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
-        Static.numberFormatter.numberStyle = .PercentStyle
-        Static.numberFormatter.positivePrefix = "+"
-        return Static.numberFormatter.numberFromString(self)?.doubleValue
-    }
-
-    func asInt() -> Int? {
-        // use right decimal separator
-        return Static.numberFormatter.numberFromString(self)?.integerValue
-    }
-    
-    func asDate() -> NSDate {
-        Static.nsDateFormatter.dateFormat = "MM/dd/yy"
-        Static.nsDateFormatter.timeZone = NSTimeZone(name: "UTC")
-        // Add the locale if required here
-        if let dateObj = Static.nsDateFormatter.dateFromString(self) {
-            return NSDate(timeInterval:0, sinceDate:dateObj)
-        } else {
-            // could not parse date string
-            return NSDate(timeIntervalSinceReferenceDate:0)
-        }
-    
     }
 }
 

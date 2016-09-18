@@ -44,6 +44,7 @@ class ExpectedMoveInteractorTests: XCTestCase
     {
         // MARK: Method call expectations
         var presentProfitLossDaysAheadCalled = false
+        var presentStockAutoCompleteCalled = false
         
         // MARK: Spied methods
         func presentProfitLossDaysAhead(response: ExpectedMove.FetchTicker.Response)
@@ -52,6 +53,10 @@ class ExpectedMoveInteractorTests: XCTestCase
         }
         
         func setNetworkActivityIndicatorVisible(visible: Bool) {
+        }
+        
+        func presentStockAutoComplete(response: ExpectedMove.AutoComplete.Response) {
+            presentStockAutoCompleteCalled = true
         }
     }
     
@@ -73,7 +78,7 @@ class ExpectedMoveInteractorTests: XCTestCase
     {
         // MARK: Method call expectations
         var calculateCalled = false
-
+        
         // MARK: Spied methods
         override func calculate(price: Double, numberOfShares: Int, impliedVolatility: Double) -> [ProfitLoss] {
             calculateCalled = true
@@ -88,6 +93,26 @@ class ExpectedMoveInteractorTests: XCTestCase
             var financeData = FinanceData()
             financeData.lastTradePrice = 100.0
             completionHandler(financeData: financeData)
+        }
+    }
+    
+    class AutoCompleteWorkerSpy: StockAutoCompleteWorker
+    {
+        // MARK: Method call expectations
+        var autoCompleteCalled = false
+        
+        // MARK: Spied methods
+        override func stockAutoComplete(ticker: String, completionHandler: (stockAutoComplete: [StockAutoCompleteResult]) -> Void) {
+            autoCompleteCalled = true
+            stockAutoCompleteService.stockAutoComplete(ticker, completionHandler: completionHandler)
+        }
+    }
+    
+    class StockAutoCompleteAPIMock: StockAutoCompleteAPI
+    {
+        override func stockAutoComplete(ticker: String, completionHandler: (stockAutoComplete: [StockAutoCompleteResult]) -> Void) {
+            let stockAutoCompleteResultArray = [StockAutoCompleteResult]()
+            completionHandler(stockAutoComplete: stockAutoCompleteResultArray)
         }
     }
     
@@ -151,4 +176,39 @@ class ExpectedMoveInteractorTests: XCTestCase
         // Then
         XCTAssert(expectedMoveInteractorOutputSpy.presentProfitLossDaysAheadCalled, "FetchTicker() should ask presenter to format expected move result")
     }
+    
+    func testAutoCompleteShouldAskStockAutoCompleteWorkerToAutoComplete()
+    {
+        // Given
+        let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
+        sut.output = expectedMoveInteractorOutputSpy
+        let autoCompleteWorkerSpy = AutoCompleteWorkerSpy(stockAutoCompleteService: StockAutoCompleteAPI())
+        sut.autoCompleteWorker = autoCompleteWorkerSpy
+        var request = ExpectedMove.AutoComplete.Request()
+        request.ticker = "AAP"
+        
+        // When
+        sut.autoComplete(request)
+        
+        // Then
+        XCTAssert(autoCompleteWorkerSpy.autoCompleteCalled, "AutoComplete() should ask worker to auto complete ticker")
+    }
+
+    func testAutoCompleteShouldAskPresenterToFormatResult()
+    {
+        // Given
+        let expectedMoveInteractorOutputSpy = ExpectedMoveInteractorOutputSpy()
+        sut.output = expectedMoveInteractorOutputSpy
+        let autoCompleteWorkerSpy = AutoCompleteWorkerSpy(stockAutoCompleteService: StockAutoCompleteAPIMock())
+        sut.autoCompleteWorker = autoCompleteWorkerSpy
+        var request = ExpectedMove.AutoComplete.Request()
+        request.ticker = "AAP"
+        
+        // When
+        sut.autoComplete(request)
+        
+        // Then
+        XCTAssert(expectedMoveInteractorOutputSpy.presentStockAutoCompleteCalled, "AutoComplete() should ask presenter to format auto complete result")
+    }
+
 }

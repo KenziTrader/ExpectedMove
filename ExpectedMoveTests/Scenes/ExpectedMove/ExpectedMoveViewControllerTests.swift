@@ -59,12 +59,19 @@ class ExpectedMoveViewControllerTests: XCTestCase
     class ExpectedMoveViewControllerOutputSpy: ExpectedMoveViewControllerOutput
     {
         // MARK: Method call expectations
+
         var fetchTickerCalled = false
+        var autoCompleteCalled = false
         
         // MARK: Spied methods
+
         func fetchTicker(request: ExpectedMove.FetchTicker.Request)
         {
             fetchTickerCalled = true
+        }
+        
+        func autoComplete(request: ExpectedMove.AutoComplete.Request) {
+            autoCompleteCalled = true
         }
     }
     
@@ -137,4 +144,23 @@ class ExpectedMoveViewControllerTests: XCTestCase
             tag += 1
        }
     }
+    
+    func testAutoCompleteCalledWhenTickerFieldChanges()
+    {
+        // Given
+        let expectedMoveViewControllerOutputSpy = ExpectedMoveViewControllerOutputSpy()
+        sut.output = expectedMoveViewControllerOutputSpy
+        let replacementString = "AAP"
+        let range = NSRange(location: 0, length: replacementString.characters.count)
+        
+        // When
+        loadView()
+        let textField = sut.tickerTextField
+        textField.delegate?.textField?(textField, shouldChangeCharactersInRange: range, replacementString: replacementString)
+        
+        // Then
+        XCTAssert(expectedMoveViewControllerOutputSpy.autoCompleteCalled, "Should call auto complete when ticker text field changes")
+    }
+    
+
 }

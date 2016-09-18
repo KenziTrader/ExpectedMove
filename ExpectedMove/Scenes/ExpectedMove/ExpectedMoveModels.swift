@@ -32,4 +32,20 @@ struct ExpectedMove {
             var profit: String
         }
     }
+    struct AutoComplete {
+        struct Request {
+            var ticker = ""
+        }
+        struct Response {
+            var searchTerm = ""
+            var autoCompleteResults = [StockAutoCompleteResult]()
+        }
+        struct ViewModel {
+            var autoCompleteResults = [DisplayedStockAutoCompleteResult]()
+        }
+        struct DisplayedStockAutoCompleteResult {
+            var ticker: String
+            var name: String
+        }
+    }
 }
