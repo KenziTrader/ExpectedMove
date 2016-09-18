@@ -22,12 +22,15 @@ extension String {
         Static.numberFormatter.usesGroupingSeparator = true
         Static.numberFormatter.groupingSeparator = ","
         Static.numberFormatter.groupingSize = 3
+        Static.numberFormatter.positivePrefix = ""
+        Static.numberFormatter.numberStyle = .DecimalStyle
         return Static.numberFormatter.numberFromString(self)?.doubleValue
     }
     
     func percentToDouble() -> Double? {
         // use right decimal separator
         Static.numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        Static.numberFormatter.positivePrefix = "+"
         Static.numberFormatter.numberStyle = .PercentStyle
         return Static.numberFormatter.numberFromString(self)?.doubleValue
     }
