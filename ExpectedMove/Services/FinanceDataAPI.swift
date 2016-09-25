@@ -117,6 +117,10 @@ extension FinanceData {
         return (x as? String)?.asDouble()
     }
     
+    private func percentToDouble(x: AnyObject?) -> Double? {
+        return (x as? String)?.percentToDouble()
+    }
+    
     private func int(x: AnyObject?) -> Int? {
         return (x as? String)?.asInt()
     }

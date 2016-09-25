@@ -18,6 +18,8 @@ extension String {
     
     func asDouble() -> Double? {
         // use right decimal separator
+        Static.numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
+        Static.numberFormatter.numberStyle = .DecimalStyle
         Static.numberFormatter.decimalSeparator = "."
         Static.numberFormatter.usesGroupingSeparator = true
         Static.numberFormatter.groupingSeparator = ","
@@ -32,6 +34,10 @@ extension String {
         Static.numberFormatter.locale = NSLocale(localeIdentifier: "en_US")
         Static.numberFormatter.positivePrefix = "+"
         Static.numberFormatter.numberStyle = .PercentStyle
+        Static.numberFormatter.decimalSeparator = "."
+        Static.numberFormatter.usesGroupingSeparator = true
+        Static.numberFormatter.groupingSeparator = ","
+        Static.numberFormatter.groupingSize = 3
         return Static.numberFormatter.numberFromString(self)?.doubleValue
     }
     
